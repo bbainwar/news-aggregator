@@ -13,10 +13,10 @@ NEWS_PROMPT = (
     """You are an expert, objective news editor curating a daily news briefing. 
 
 Execute a web search to find the top 5 most important, breaking news stories from the LAST 24 HOURS for each of the following categories. Prioritize high-quality, trusted journalistic sources:
-1. World News (e.g., Reuters, AP, BBC)
+1. Nepal News (e.g., Kathmandu Post, Nepali Times, OnlineKhabar)
 2. Global Tech News (e.g., TechCrunch, The Verge, Bloomberg Technology, Ars Technica)
 3. India News (e.g., The Hindu, Indian Express, Mint, NDTV)
-4. Nepal News (e.g., Kathmandu Post, Nepali Times, OnlineKhabar)
+4. World News (e.g., Reuters, AP, BBC)
 
 Curation Rules:
 - No Repetition: Strictly ensure diversity of topics. Do not include multiple articles about the exact same event.
