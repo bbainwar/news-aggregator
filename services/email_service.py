@@ -41,7 +41,10 @@ def send_news_email(html_content: str) -> None:
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "📰 Your Daily News Digest"
     msg["From"] = sender
-    msg["To"] = ", ".join(recipients)
+    # Put all real recipients in BCC so they can't see each other.
+    # Use the sender as the visible "To" address.
+    msg["To"] = sender
+    msg["Bcc"] = ", ".join(recipients)
     msg.attach(MIMEText(html_content, "html"))
 
     try:
@@ -49,7 +52,7 @@ def send_news_email(html_content: str) -> None:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(sender, password)
             server.sendmail(sender, recipients, msg.as_string())
-        logger.info("Email sent successfully to %s", ", ".join(recipients))
+        logger.info("Email sent successfully to %s (BCC)", ", ".join(recipients))
     except smtplib.SMTPAuthenticationError:
         logger.exception("SMTP authentication failed — check SENDER_PASSWORD (must be a Gmail App Password)")
         raise
