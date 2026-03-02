@@ -41,10 +41,11 @@ def send_news_email(html_content: str) -> None:
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "📰 Your Daily News Digest"
     msg["From"] = sender
-    # Put all real recipients in BCC so they can't see each other.
+    # Put all real recipients in the SMTP envelope (BCC).
+    # IMPORTANT: Do NOT add a "Bcc" header to the message, otherwise some clients
+    # may display the full list to recipients.
     # Use the sender as the visible "To" address.
     msg["To"] = sender
-    msg["Bcc"] = ", ".join(recipients)
     msg.attach(MIMEText(html_content, "html"))
 
     try:
